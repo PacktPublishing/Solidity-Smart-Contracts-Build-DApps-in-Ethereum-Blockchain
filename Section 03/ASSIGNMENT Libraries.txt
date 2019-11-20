@@ -1,0 +1,77 @@
+ASSIGNMENT Libraries
+ASSIGNMENT
+
+To test it out import the safe math library from github inside a previous contract you have made.
+
+Attach the SafeMath to the uint256 variables and change all the math operations to go through the library functions as shown in the example.
+
+This will prevent the overflow and underflow of your numbers.
+
+After you finish go to the next lecture.
+
+------------------------------------------------------------------------------------------------
+
+SOLIDITY LIBRARIES ON GITHUB
+httpsgithub.comModular-Networkethereum-libraries
+
+httpsgithub.comalianse777solidity-standard-library
+
+httpsgithub.comOpenZeppelinopenzeppelin-solidity
+
+httpsgithub.comethereumdapp-bintreemasterlibrary
+
+Please write message me if there a broken link in here, or if you have found a useful library online so I can add it here. Thank you!
+
+------------------------------------------------------------------------------------------------
+
+Contracts from the lecture
+
+Works with both ^0.5.0 and ^0.4.24
+
+pragma solidity ^0.5.0;
+ 
+library SafeMath {
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a  b;
+    assert(a == 0  c  a == b);
+    return c;
+  }
+ 
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+     assert(b  0);  Solidity automatically throws when dividing by 0
+    uint256 c = a  b;
+     assert(a == b  c + a % b);  There is no case in which this doesn't hold
+    return c;
+  }
+ 
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b = a);
+    return a - b;
+  }
+ 
+  function add(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a + b;
+    assert(c = a);
+    return c;
+  }
+}
+Safe math imported library from GitHub now requires solidity ^0.5.2 at least in order to compile
+
+pragma solidity ^0.5.2;
+ 
+import github.comOpenZeppelinzeppelin-soliditycontractsmathSafeMath.sol;
+ 
+contract Bank {
+    mapping(address = uint) public accounts;
+    using SafeMath for uint256;
+ 
+    function deposit() public payable {
+       require(accounts[msg.sender] + msg.value = accounts[msg.sender], Overflow error);
+       accounts[msg.sender] = accounts[msg.sender].add(msg.value);
+    }
+    
+    function withdraw(uint money) public {
+       require(money = accounts[msg.sender]);
+       accounts[msg.sender] = accounts[msg.sender].sub(money);
+    }
+}

@@ -1,0 +1,30 @@
+ASSIGNMENT Variables Practice
+Now, go to httpsremix.ethereum.org and copy the contracts below
+
+Try out what you will get when you deploy each contracts and call the variables. This way you will get familiour with the Remix IDE and have a good practice.
+
+Remember as aways to write the contracts yourself just by looking and not copy-pasting them in Remix. It is better to write on your own so you can get used to  catching typing errors that you can make.
+
+pragma solidity ^0.4.24;
+ 
+contract VariableExamples{
+    bool public switchedOn = true;
+    address public owner = msg.sender;
+    uint8 public number = 8;
+    bytes32 public awesome1 = Solidity is awesome!;
+    string public awesome2 = Solidity is awesome!;
+}
+Below we have the example of overflow and underflow of a number. It is a common pitfall in programming so be aware of it and avoid it at all costs.
+
+pragma solidity ^0.4.24;
+contract OverflowAndUnderflow {
+    function overflow() public pure returns(uint256){
+        uint256 max = 2256-1;
+        return max +1;
+    }
+ 
+    function underflow() public pure returns(uint256){
+        uint256 min = 0;
+        return min-1;
+    }
+}

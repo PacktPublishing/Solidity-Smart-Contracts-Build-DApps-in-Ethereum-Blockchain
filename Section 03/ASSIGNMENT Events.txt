@@ -1,0 +1,53 @@
+ASSIGNMENT Events
+ASSIGNMENT
+
+Now for an assignment you will have to copy this contract and play around with it in remix and take a look at the log row that we have when we rise an event.
+
+You will need to create a new simple event and emit it inside the deposit function.
+
+This way you will be able to see how you will get multiple events in the log row.
+
+After you are done with this continue to the next lecture.
+
+----------------
+
+Contracts from this lecture
+
+for solidity ^0.4.24
+
+pragma solidity ^0.4.24;
+ 
+contract SmartExchange {
+	event Deposit(address from, bytes32 to, uint indexed  value);
+	event Transfer(bytes32 from, address to, uint indexed value);
+ 
+	function deposit(bytes32 to) payable public {
+		emit Deposit(msg.sender, to, msg.value);
+	}
+ 
+	function transfer(bytes32 from, address to, uint value) payable public{
+		to.transfer(value);
+		emit Transfer(from, to, value);
+	}
+}
+For solidity ^5.0.0 you need to add payable to the address to in the function.
+
+This is due to some breaking changes in Solidity version 0.5. Namely that an address has to be marked as payable - otherwise it won't have the transfer function. More info here httpssolidity.readthedocs.ioenv0.5.0050-breaking-changes.html#explicitness-requirements
+
+Code updated for solidity ^0.5.0
+
+pragma solidity ^0.5.0;
+ 
+contract SmartExchange {
+	event Deposit(address from, bytes32 to, uint indexed  value);
+	event Transfer(bytes32 from, address to, uint indexed value);
+ 
+	function deposit(bytes32 to) payable public {
+		emit Deposit(msg.sender, to, msg.value);
+	}
+ 
+	function transfer(bytes32 from, address payable to, uint value) payable public{
+		to.transfer(value);
+		emit Transfer(from, to, value);
+	}
+}

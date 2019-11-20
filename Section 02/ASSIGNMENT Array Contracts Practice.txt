@@ -1,0 +1,63 @@
+ASSIGNMENT Array Contracts Practice
+Now your assignment is to type those contracts in httpsremix.ethereum.org and play around with them so you can see what is happening. Deploy each contract and try to add an array element to the dynamic array with the push member (addScore function). Retrieve the lenght and clear the array. After that continue to the next lecture
+
+Fixed Size Array Contract
+
+pragma solidity^0.4.24;
+ 
+contract SampleContract {
+    uint8[3] nums = [10, 20, 30];
+ 
+    function getNums() public returns (uint8[3]){
+        nums[0] = 11;
+        nums[1] = 22;
+        nums[2] = 33;
+        return nums;
+    }
+    
+    function getLength() view public returns (uint){
+        return nums.length;
+    }
+}
+Dynamic Array Contract
+
+pragma solidity^0.4.24;
+ 
+contract Score {
+   uint24[] score;
+ 
+   function addScore(uint24 s) public returns(uint24[]) {
+       score.push(s);
+       return score;
+   }
+ 
+   function getLength() view public returns(uint) {
+       return score.length;
+   }   
+ 
+   function clearArray() public returns(uint24[]) {
+       delete score;
+       return score;
+   }   
+}
+UPDATE for Solidity ^0.5.0 Dynamic Array Contract
+
+pragma solidity^0.5.0;
+ 
+contract Score {
+   uint24[] score;
+ 
+   function addScore(uint24 s) public returns(uint24[] memory) {
+       score.push(s);
+       return score;
+   }
+ 
+   function getLength() view public returns(uint) {
+       return score.length;
+   }   
+ 
+   function clearArray() public returns(uint24[] memory) {
+       delete score;
+       return score;
+   }   
+}  

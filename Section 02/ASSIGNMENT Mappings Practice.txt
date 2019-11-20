@@ -1,0 +1,46 @@
+ASSIGNMENT Mappings Practice
+Now, go ahead and copy the contracts and test them out in httpsremix.ethereum.org
+
+After that do the following
+
+Create a function that returns the balance of a certain account
+
+Create a function that returns the available tokens supply
+
+Create a payable function that receives ether and it will send tokens to the sender.
+
+Bank Contract Example
+
+pragma solidity ^0.4.24;
+ 
+contract Bank {
+    mapping(address = uint) public accounts;
+ 
+    function deposit(uint money) public {
+       accounts[msg.sender] += money;
+    }
+    
+    function withdraw(uint money) public {
+       accounts[msg.sender] -= money;
+    }
+}
+Simple Token Example
+
+pragma solidity ^0.4.24;
+ 
+contract SimpleToken {
+  address owner;
+  mapping (address = uint256) public accounts;
+ 
+  constructor(uint256 initialSupply) public {
+owner = msg.sender;
+  	accounts[owner] = initialSupply;
+  }
+ 
+  function transfer(address to, uint256 value) public {
+     require(accounts[msg.sender] = value);
+     require(accounts[to] + value = accounts[to]);
+     accounts[msg.sender] -= value;
+     accounts[to] += value; 
+  }
+}

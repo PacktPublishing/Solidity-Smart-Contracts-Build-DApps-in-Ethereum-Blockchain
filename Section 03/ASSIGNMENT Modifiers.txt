@@ -1,0 +1,69 @@
+ASSIGNMENT Modifiers
+Now your assignment will be to go through your previous contracts that you applied your restriction.
+
+Think about where you can apply a restriction of onlyOwner and create a modifier for that.
+
+After that apply the modifier to the functions that need to be executed only by the owner.
+
+After you have finished your assignment continue to the next lecture.
+
+-----------------------
+
+Contracts from this lecture
+
+Only Seller Modifier
+
+pragma solidity ^0.5.0;
+ 
+contract Purchase {
+    address public seller;
+ 
+    modifier onlySeller {  Modifier
+        require(msg.sender == seller);
+        _;
+    }
+ 
+    function abort() public view onlySeller {  Modifier usage
+         ...
+    }
+}
+Only Owner Modifier for solidity ^0.4.24
+
+pragma solidity ^0.4.24;
+ 
+contract owned {
+    constructor() public { owner = msg.sender; }
+    address owner;
+ 
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+}
+ 
+contract mortal is owned {
+ 
+    function close() public onlyOwner {
+        selfdestruct(owner);
+    }
+}
+Only Owner Modifier for solidity ^0.5.0
+
+pragma solidity ^0.5.0;
+ 
+contract owned {
+    constructor() public { owner = msg.sender; }
+    address payable owner;
+ 
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+}
+ 
+contract mortal is owned {
+ 
+    function close() public onlyOwner {
+        selfdestruct(owner);
+    }
+}

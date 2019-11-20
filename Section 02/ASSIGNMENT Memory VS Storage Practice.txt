@@ -1,0 +1,21 @@
+ASSIGNMENT Memory VS Storage Practice
+Test out the below contract in httpsremix.ethereum.org and see what is the difference between memory and storage variables. Remember that function arguments are by default memory and variables that we define inside our contracts are by default storage.
+
+pragma solidity ^0.4.24;
+ 
+contract ChangeArrayValue {
+    uint[20] public arr;
+ 
+    function startChange() public {
+        firstChange(arr);
+        secondChange(arr);
+    }
+ 
+    function firstChange(uint[20] storage x) internal {
+        x[0] = 4;
+    }
+    
+    function secondChange(uint[20] x) internal pure {
+        x[0] = 3;
+    }
+}
